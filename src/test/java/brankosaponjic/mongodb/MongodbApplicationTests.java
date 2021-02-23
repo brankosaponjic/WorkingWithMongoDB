@@ -5,12 +5,12 @@ import brankosaponjic.mongodb.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class MongodbApplicationTests {
@@ -21,16 +21,16 @@ class MongodbApplicationTests {
     @Test
     void testSave() {
         Product product = new Product();
-        product.setName("Mac Book Pro");
-        product.setPrice(2000f);
+        product.setName("iPad Pro");
+        product.setPrice(799f);
         Product savedProduct = productRepository.save(product);
-        Assert.notNull(savedProduct,"Mustn't be null!");
+        assertNotNull(savedProduct,"Mustn't be null!");
 
         Product product2 = new Product();
-        product2.setName("Iphone 12 Pro");
-        product2.setPrice(1200f);
+        product2.setName("iPad mini");
+        product2.setPrice(399f);
         Product savedProduct2 = productRepository.save(product2);
-        Assert.notNull(savedProduct2,"Mustn't be null!");
+        assertNotNull(savedProduct2,"Mustn't be null!");
     }
 
     @Test
@@ -45,5 +45,16 @@ class MongodbApplicationTests {
         Optional<Product> product = productRepository.findById("60352bb79599fb557bedd240");
         assertEquals(Optional.empty(), product);
     }
+
+    @Test
+    void testUpdate() {
+        Optional<Product> product = productRepository.findById("603533060c953039c5995844");
+        if (product.isPresent()){
+            product.get().setPrice(899f);
+            productRepository.save(product.get());
+        }
+    }
+
+
 
 }
