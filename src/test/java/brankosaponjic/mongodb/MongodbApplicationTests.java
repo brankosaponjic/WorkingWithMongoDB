@@ -24,7 +24,7 @@ class MongodbApplicationTests {
         Product product2 = new Product();
         product2.setName("Iphone 12 Pro");
         product2.setPrice(1200f);
-        Product savedProduct2 = productRepository.save(product);
+        Product savedProduct2 = productRepository.save(product2);
         Assert.notNull(savedProduct2,"Mustn't be null!");
     }
 
